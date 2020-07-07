@@ -26,7 +26,7 @@ function App() {
       productsTmp = [];
     }   
 
-    let initialState = { products: productsTmp};
+    let initialState = { products: productsTmp };
 
     const addToCart = (item, products) => {
       item.id = parseInt(item.id);
@@ -71,7 +71,12 @@ function App() {
               return getProducts(state.products);
 
             case "emptyCart":
-              toast("Todos os itens foram removidos do carrinho.");
+              if (action.cancelled) {
+                toast("Todos os itens foram removidos do carrinho.");
+              }
+              
+              localStorage.setItem('products', JSON.stringify([]));
+              
               return { ...state, products: [] };
 
             case "removeItemOfCart":
@@ -107,7 +112,7 @@ function App() {
         </div>
       </div>
       <Footer />
-      <ToastContainer position="bottom-right" autoClose="2000" />
+      <ToastContainer position="bottom-right" autoClose={2000} />
       </StoreContext.Provider>
     </Router>    
   );

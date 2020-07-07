@@ -7,7 +7,7 @@ const Footer = (props) => {
             <footer className="footer">
                 <div className="container">
                     <span className="text-muted">
-                        Pokemon Store HC - Projeto desenvolvido para fins acadêmicos no programa Hiring Coders - Gama Academy
+                        Pokestore HC - Projeto desenvolvido para fins acadêmicos no programa Hiring Coders - Gama Academy
                     </span>
                 </div>
             </footer>            

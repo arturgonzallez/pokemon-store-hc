@@ -85,12 +85,12 @@ const PokemonList = React.memo(props => {
     dispatch({ type: 'addToCart', item});
   }
 
-  const handlePrevious = () => {
-    if (btnPrevious) {
+  const handlePrevious = (top) => {
+    if (btnPrevious) { 
       return (
         <>
           <button type="button" 
-                className="btn btn-outline-info btn-sm mr-1"
+                className={"btn btn-outline-" + ((top) ? 'default' : 'info') + " btn-sm mr-1"}
                 onClick={e => handlePreviousClick(e)}><FontAwesomeIcon icon={faAngleDoubleLeft} /></button>
         </>
       );
@@ -99,12 +99,12 @@ const PokemonList = React.memo(props => {
     return (<></>);
   };
 
-  const handleNext = () => {
+  const handleNext = (top) => {
     if (btnNext) {
       return (
         <>
           <button type="button" 
-                className="btn btn-outline-info btn-sm ml-1"
+                className={"btn btn-outline-" + ((top) ? 'default' : 'info') + " btn-sm ml-1"}
                 onClick={e => handleNextClick(e)}><FontAwesomeIcon icon={faAngleDoubleRight} /></button>
         </>
       );
@@ -144,9 +144,9 @@ const PokemonList = React.memo(props => {
       <h4>{title}</h4>
       <div className="row">
         <div className="col-md-12 center">
-          {handlePrevious()}
+          {handlePrevious(true)}
 
-          {handleNext()}
+          {handleNext(true)}
         </div>
       </div>
       <div className="list row center">

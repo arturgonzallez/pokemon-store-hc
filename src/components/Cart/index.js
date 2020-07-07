@@ -65,7 +65,7 @@ const Cart = () => {
     }
 
     const handleEmpty = () => {
-        dispatch({ type: 'emptyCart'});
+        dispatch({ type: 'emptyCart', cancelled: true });
     }
 
     return (
