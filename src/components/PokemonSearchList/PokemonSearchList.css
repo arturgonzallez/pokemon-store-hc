@@ -1,0 +1,18 @@
+.list-pokemon {
+    list-style-type: none !important;
+    display: inline-block !important;
+}
+
+.list-pokemon li {
+    width: 33% !important;
+    float: left;
+    text-align: center;
+}
+
+.list-pokemon li img {
+    width: 50% !important;
+}
+
+.center {
+    text-align: center;
+}

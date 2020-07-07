@@ -1,0 +1,57 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  padding-top: 60px;
+  margin-bottom: 60px;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+
+code {
+  font-size: 80%;
+}
+
+@media only screen and (max-width: 1280px) {
+  body {
+    padding-top: 10% !important;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1200px) { 
+  body {
+    padding-bottom: 60px;
+  }
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {  
+  body {
+    padding-top: 12% !important;
+  }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+  body {
+    padding-top: 12% !important;
+  }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+  body {
+    padding-top: 15% !important;
+  }
+}
