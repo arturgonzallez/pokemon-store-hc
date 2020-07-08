@@ -17,6 +17,7 @@ import Header from './components/Header';
 import StoreContext from './contexts/Store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
     let productsTmp = null;
@@ -91,9 +92,8 @@ function App() {
     let value = { state, dispatch };
 
   return (
-    <Router>
-      <StoreContext.Provider value={value}>
-      <div>
+    <StoreContext.Provider value={value}>
+      <Router>
         <Header />
 
         <div className="container mt-3">
@@ -101,8 +101,10 @@ function App() {
             <div className="col-md-8">
               <Switch>
                 <Route key="inicio" exact path={["/", "/inicio"]} component={PokemonList}/>
-                <Route key="tipos" path="/tipos/:id" component={PokemonList} />
-                <Route key="search" path="/search/:keySearch" component={PokemonSearchList} />
+                <Route key="tipos" exact path="/tipos/:id" component={PokemonList} />
+                <Route key="search" exact path="/search/:keySearch" component={PokemonSearchList} />
+                <Route key="tipos" exact path="/tipos/:id" component={PokemonList} />
+                <Route component={PageNotFound} />
               </Switch>
             </div>
             <div className="col-md-4">
@@ -110,11 +112,10 @@ function App() {
             </div>
           </div>
         </div>
-      </div>
       <Footer />
       <ToastContainer position="bottom-right" autoClose={2000} />
-      </StoreContext.Provider>
-    </Router>    
+      </Router>
+    </StoreContext.Provider>   
   );
 }
 

@@ -8,12 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft, faAngleDoubleRight, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 import StoreContext from "../../contexts/Store";
+import Spinner from "react-spinner-material";
 
 const PokemonList = React.memo(props => {
   const [pokemon, setPokemon] = useState([]);
   const [btnPrevious, setBtnPrevious] = useState(null);
   const [btnNext, setBtnNext] = useState(null);
   const [title, setTitle] = useState('em destaque');
+  const [load, setLoad] = useState(false);
   const { id } = useParams();
 
   const { dispatch } = useContext(StoreContext);
@@ -23,7 +25,9 @@ const PokemonList = React.memo(props => {
   }, [id]);
 
   const loadPokemon = async (id, limit, offset) => {
-    try {      
+    try {
+      setLoad(true);
+
       if (id) {
         let response = await PokemonService.get(id);
         let responseType = await TypeService.get(id);
@@ -42,9 +46,16 @@ const PokemonList = React.memo(props => {
         setBtnNext(response.data.next);
         setTitle('em destaque');
       }
+
+      setLoad(false);
   
     } catch(err) {
-      console.log(err);
+      setPokemon([]);
+      setLoad(false);
+
+      if (!err.message.indexOf('code 404')) {
+        console.log(err);
+      } 
     }
   };
 
@@ -142,6 +153,9 @@ const PokemonList = React.memo(props => {
   return (
     <>
       <h4>{title}</h4>
+
+      <Spinner size={120} spinnerColor={"#333"} spinnerWidth={2} visible={load} />
+
       <div className="row">
         <div className="col-md-12 center">
           {handlePrevious()}

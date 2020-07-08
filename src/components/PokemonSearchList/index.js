@@ -8,9 +8,12 @@ import StoreContext from "../../contexts/Store";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
+import Spinner from 'react-spinner-material';
+
 const PokemonSearchList = props => {
   const [pokemon, setPokemon] = useState([]);
   const [title, setTitle] = useState('Resultado para pesquisa');
+  const [load, setLoad] = useState(false);
   const { keySearch } = useParams();
 
   const { dispatch } = useContext(StoreContext);
@@ -22,17 +25,25 @@ const PokemonSearchList = props => {
   const loadPokemon = async (keyPokemonSearch) => {
     setTitle(`Resultado da pesquisa para "${keyPokemonSearch}"`);
 
-    try {      
+    try {
+      setLoad(true);
       let response = await PokemonService.findByName(keyPokemonSearch);
         
       if (response.status === 404) {
         setPokemon([]);
       } else {
         setPokemon([response.data]);
-      }    
-  
+      }
+
+      setLoad(false);
+      
     } catch(err) {
-      console.log(err);
+      setPokemon([]);
+      setLoad(false);
+
+      if (!err.message.indexOf('code 404')) {
+        console.log(err);
+      }      
     }
   };
 
@@ -51,6 +62,7 @@ const PokemonSearchList = props => {
   return (
     <>
       <h4>{title}</h4>
+      <Spinner size={120} spinnerColor={"#333"} spinnerWidth={2} visible={load} />
 
       <div className="list row center">
             {pokemon &&
@@ -70,8 +82,8 @@ const PokemonSearchList = props => {
                   </div>                  
               ))}
 
-          { pokemon.length === 0 ? 'Nenhum resultado encontrado' : '' }
       </div>
+      { (pokemon.length === 0 && !load) ? <div className="center mt-5">Nenhum resultado encontrado</div> : '' }
     </>
   );
 };
