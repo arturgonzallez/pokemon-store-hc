@@ -1,11 +1,13 @@
 import React, { useContext, createRef, useRef } from 'react';
 import StoreContext from '../../contexts/Store';
 import CartModal from '../CartModal';
-import $ from 'jquery';
 import CartModalSucesso from '../CartModalSuccesso';
+import $ from 'jquery';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
+
+import './Cart.css';
 
 const Cart = () => {
     const { state, dispatch } = useContext(StoreContext);

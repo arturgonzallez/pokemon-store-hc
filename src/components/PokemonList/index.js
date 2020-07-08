@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
 import PokemonService from '../../services/PokemonService';
 import TypeService from '../../services/TypeService';
 import './PokemonList.css';
-import { useParams } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft, faAngleDoubleRight, faCartPlus } from '@fortawesome/free-solid-svg-icons';
@@ -144,9 +144,8 @@ const PokemonList = React.memo(props => {
       <h4>{title}</h4>
       <div className="row">
         <div className="col-md-12 center">
-          {handlePrevious(true)}
-
-          {handleNext(true)}
+          {handlePrevious()}
+          {handleNext()}
         </div>
       </div>
       <div className="list row center">
@@ -171,7 +170,6 @@ const PokemonList = React.memo(props => {
       <div className="row">
         <div className="col-md-12 center">
           {handlePrevious()}
-
           {handleNext()}
         </div>
       </div>
